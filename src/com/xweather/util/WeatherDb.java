@@ -37,7 +37,7 @@ public class WeatherDb {
 			ContentValues values = new ContentValues();
 			values.put("province_name", province.getProvinceName());
 			values.put("province_code", province.getProvinceCode());
-			sqlDb.insert("Province", null, values);	//猜测这里自动以insert into 来向sqlite3存储数据，id自增
+			sqlDb.insert("Province", null, values);	
 		}
 	}
 	
@@ -55,6 +55,33 @@ public class WeatherDb {
 		}
 		return list;
 	}
+	
+	
+/*	public void saveProvince2(Province p){
+		if(p != null){
+			ContentValues cv = new ContentValues();
+			cv.put("", p.getProvinceCode());
+			cv.put("", p.getProvinceName());
+			sqlDb.insert("Province", null, cv);
+		}
+	}
+	
+	
+	public  List<Province> queryProvince(){
+		List<Province> list = new ArrayList<Province>();
+		Cursor corsur = sqlDb.query("Province", null, null, null, null, null, null);
+		if(corsur.moveToFirst()){
+			do{
+				Province p = new Province();
+				p.setId(corsur.getInt(corsur.getColumnIndex("id")));
+				p.setProvinceName(corsur.getString(corsur.getColumnIndex("province_name")));
+				p.setProvinceCode(corsur.getString(corsur.getColumnIndex("province_code")));
+				list.add(p);
+			}while(corsur.moveToNext());
+		}
+		return list;
+	}*/
+	
 	
 	public void saveCity(City city){
 		if (city != null){
@@ -92,6 +119,7 @@ public class WeatherDb {
 			sqlDb.insert("Country", null, values);
 		}
 	}
+	
 	
 	public List<Country> loadCountry(int city_id){
 		 List<Country> list = new ArrayList<Country>();

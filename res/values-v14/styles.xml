@@ -5,8 +5,30 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- API 14 theme customizations can go here. -->
+   <style name="AppBaseTheme_normal" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/x_actuoinbar</item>
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
     </style>
+    
+    <style name="x_actuoinbar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/actionbarbg</item>
+        <item name="android:backgroundStacked">#4A708B</item>
+        <item name="android:backgroundSplit">#4A708B</item> 
+        <item name="android:titleTextStyle">@style/x_actionbar_textstyle</item>
+    </style>
+    <style name="x_actionbar_textstyle">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">@dimen/actionbar_textsize</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="@style/AppBaseTheme_normal">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
 
 </resources>

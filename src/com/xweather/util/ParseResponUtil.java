@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.xweather.R;
 import com.xweather.bean.City;
 import com.xweather.bean.Country;
 import com.xweather.bean.Province;
@@ -17,15 +18,10 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class Utility {
+public class ParseResponUtil {
 	
-	//Êı¾İÀàËÆÓÚ  01|±±¾©,02|ÉÏº£,03|Ìì½ò,04|
-	//190401|ËÕÖİ,190402|³£Êì,
-	/*{"weatherinfo": 
-    {"city":"À¥É½","cityid":"101190404","temp1":"21¡æ","temp2":"9¡æ",
-    "weather":"¶àÔÆ×ªĞ¡Óê","img1":"d1.gif","img2":"n7.gif","ptime":"11:00"}*/
 	/**
-	 *¸ù¾İresponse½âÎöºÍ±£´æÊ¡Ò»¼¶ĞÅÏ¢
+	 *ä¿¡æ¯æ ¼å¼   01|åŒ—äº¬,02|ä¸Šæµ·,03|å¤©æ´¥,04|...
 	 */
 	public synchronized static boolean handleProvinceResponse(WeatherDb weatherDb,String response){
 		
@@ -46,13 +42,13 @@ public class Utility {
 	}
 	
 	/**
-	 * ½âÎöºÍ±£´æÊĞÒ»¼¶ĞÅÏ¢
+	 * ä¿¡æ¯æ ¼å¼   190401|è‹å·,190402|å¸¸ç†Ÿ...
 	 */
 	public static boolean handleCityResponse(WeatherDb weatherDb,String response,int provinceId){
 		if (!TextUtils.isEmpty(response)){
 			String[] allCity = response.split(",");
 			for (String c:allCity){
-				String[] s = c.split("\\|"); //\\ÊÇ×ªÒå
+				String[] s = c.split("\\|"); //\\ï¿½ï¿½×ªï¿½ï¿½
 				City c2 = new City();
 				c2.setCityCode(s[0]);
 				c2.setCityName(s[1]);
@@ -66,7 +62,7 @@ public class Utility {
 	
 	
 	/**
-	 * ½âÎöºÍ±£´æ   Ó¦¸ÃÊÇÏØ   Ò»¼¶ĞÅÏ¢
+	 * 
 	 */
 	public static boolean handleCountryResponse(WeatherDb weatherDb,String response,int cityId){
 		if (!TextUtils.isEmpty(response) ){
@@ -86,7 +82,9 @@ public class Utility {
 		return false;
 	}
 	
-	
+	/**
+	 * {"weatherinfo":{"city":"æ˜†å±±","cityid":"101190404","temp1":"20â„ƒ","temp2":"11â„ƒ","weather":"å°é›¨","img1":"d7.gif","img2":"n7.gif","ptime":"08:00"}}
+	 */
 	public static void handleWeatherResponse(Context context,String response){
 		
 		try {
@@ -98,7 +96,6 @@ public class Utility {
 			String temp2 = weatherInfo.getString("temp2");
 			String weatherdesp = weatherInfo.getString("weather");
 			String publishTime = weatherInfo.getString("ptime");
-			Log.i("xw","handleWeatherResponse temp1 temp2 :"+temp1+"   "+temp2);
 			saveWeatherInfo(context, cityName, weatherCode, temp1, temp2, weatherdesp, publishTime);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -109,16 +106,18 @@ public class Utility {
 	public static void saveWeatherInfo(Context context,String cityName,String weathercode,
 			String temp1,String temp2,String weatherDesp,String publishTime){
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyÄêmÔÂdÈÕ", Locale.CHINA);	//??
+		//SimpleDateFormat sdf = new SimpleDateFormat(context.getResources().getString(R.string.simpledateformat), Locale.CHINA);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥", Locale.CHINA);	
 		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-		editor.putBoolean("city_selected", true);
-		editor.putString("city_name", cityName);
-		editor.putString("weather_code", weathercode);
-		editor.putString("temp1", temp1);
-		editor.putString("temp2", temp2);
-		editor.putString("weather_desp", weatherDesp);
-		editor.putString("publish_time", publishTime);
-		editor.putString("current_date", sdf.format(new Date()));
+		editor.putBoolean(Consts.SPKey_City_selected, true);
+		editor.putString(Consts.SPKey_City_name, cityName);
+		editor.putString(Consts.SPKey_Weather_code, weathercode);
+		editor.putString(Consts.SPKey_Temp1, temp1);
+		editor.putString(Consts.SPKey_Temp2, temp2);
+		editor.putString(Consts.SPKey_Weather_desp, weatherDesp);
+		editor.putString(Consts.SPKey_Publish_time, publishTime);
+		editor.putString(Consts.SPKey_Current_date, sdf.format(new Date()));
+		LogUtil.getInstance().info("current_date" + sdf.format(new Date()));
 		editor.commit();
 		
 		

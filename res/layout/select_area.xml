@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <RelativeLayout 
+<!--     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#333"
@@ -18,7 +18,7 @@
             android:textColor="#fff"
             android:textSize="20sp"
             />
-    </RelativeLayout>
+    </RelativeLayout> -->
 
     
     <ListView 

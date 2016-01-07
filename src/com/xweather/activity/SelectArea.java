@@ -7,9 +7,9 @@ import com.example.xweather.R;
 import com.xweather.bean.City;
 import com.xweather.bean.Country;
 import com.xweather.bean.Province;
-import com.xweather.util.HttpCallbackListener;
-import com.xweather.util.HttpUtil;
-import com.xweather.util.Utility;
+import com.xweather.net.HttpCallbackListener;
+import com.xweather.net.HttpUtil;
+import com.xweather.util.ParseResponUtil;
 import com.xweather.util.WeatherDb;
 
 import android.app.Activity;
@@ -36,7 +36,7 @@ public class SelectArea extends Activity{
 	public static final int LEVEL_COUNTRY = 2;
 	
 	private ProgressDialog progressdialog;
-	private TextView titleText;
+	//private TextView titleText;
 	private ListView listView;
 	private ArrayAdapter<String> adapter;
 	private WeatherDb weatherDb;
@@ -54,21 +54,19 @@ public class SelectArea extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		SharedPreferences pre = PreferenceManager.getDefaultSharedPreferences(this);
+/*		SharedPreferences pre = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean b = pre.getBoolean("city_selected", false);
-		Log.i("xw","SelectArea onCreate,city_selected:"+b);
 		if (pre.getBoolean("city_selected", false)){
 				Intent intent = new Intent(this, WeatherPageActivity.class);
 				startActivity(intent);
 				return;
-			}
+			}*/
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.select_area);
 		
 		listView = (ListView) findViewById(R.id.select_area_listview);
-		titleText = (TextView) findViewById(R.id.select_area_titletext);
+		//titleText = (TextView) findViewById(R.id.select_area_titletext);
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
 		listView.setAdapter(adapter);
@@ -91,6 +89,7 @@ public class SelectArea extends Activity{
 					String countryCode = countryList.get(arg2).getCountcode();
 					Intent intent = new Intent(SelectArea.this, WeatherPageActivity.class);
 					intent.putExtra("country_code", countryCode);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 					finish();
 				}
@@ -107,7 +106,8 @@ public class SelectArea extends Activity{
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			titleText.setText("中国");
+			//titleText.setText("锟叫癸拷");
+			getActionBar().setTitle(getResources().getString(R.string.select_area_china));
 			currentLevel = LEVEL_PROVINCE;
 		}else{
 			queryFromServer(null,"province");
@@ -123,13 +123,17 @@ public class SelectArea extends Activity{
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			titleText.setText(selectedProvince.getProvinceName());
+			//titleText.setText(selectedProvince.getProvinceName());
+			getActionBar().setTitle(selectedProvince.getProvinceName());
 			currentLevel = LEVEL_CITY;
 		}else{
 			queryFromServer(selectedProvince.getProvinceCode(),"city");
 		}
 	}
 	
+	/**
+	 * 锟斤拷
+	 */
 	private void queryCountry(){
 		countryList = weatherDb.loadCountry(selectedCity.getId());
 		if (countryList.size()>0){
@@ -139,7 +143,8 @@ public class SelectArea extends Activity{
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			titleText.setText(selectedCity.getCityName());
+			//titleText.setText(selectedCity.getCityName());
+			getActionBar().setTitle(selectedCity.getCityName());
 			currentLevel = LEVEL_COUNTRY;
 		}else{
 			queryFromServer(selectedCity.getCityCode(),"country");
@@ -157,12 +162,13 @@ public class SelectArea extends Activity{
 		HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
 			
 			@Override
-			public void onRrror(Exception e) {
+			public void onError(Exception e) {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						closeProgressDialog();
-						Toast.makeText(SelectArea.this, "向服务器请求失败", Toast.LENGTH_SHORT).show();
-						//在线程里，需要SelectArea.this
+						Toast.makeText(SelectArea.this, 
+								getResources().getString(R.string.select_area_failed_request_service), 
+								Toast.LENGTH_SHORT).show();
 					}
 				});
 				
@@ -172,11 +178,11 @@ public class SelectArea extends Activity{
 			public void onFinish(String response) {
 				boolean result = false;
 				if (type.equals("province")){
-					result = Utility.handleProvinceResponse(weatherDb, response);
+					result = ParseResponUtil.handleProvinceResponse(weatherDb, response);
 				}else if (type.equals("city")){
-					result = Utility.handleCityResponse(weatherDb, response, selectedProvince.getId());
+					result = ParseResponUtil.handleCityResponse(weatherDb, response, selectedProvince.getId());
 				}else if (type.equals("country")){
-					result = Utility.handleCountryResponse(weatherDb, response, selectedCity.getId());
+					result = ParseResponUtil.handleCountryResponse(weatherDb, response, selectedCity.getId());
 				}
 				
 				if(result){
@@ -201,7 +207,7 @@ public class SelectArea extends Activity{
 	private void showProgressDialog(){
 		if (progressdialog == null){
 			progressdialog = new ProgressDialog(this);
-			progressdialog.setMessage("正在读取信息");
+			progressdialog.setMessage(getResources().getString(R.string.select_area_reading_info));
 			progressdialog.setCanceledOnTouchOutside(false);
 		}
 		progressdialog.show();
@@ -222,8 +228,8 @@ public class SelectArea extends Activity{
 		}else if(currentLevel == LEVEL_CITY){
 			queryProvince();
 		}else{
-			//finish();
-			moveTaskToBack(false);
+			finish();
+			//moveTaskToBack(true);
 		}
 	}
 }

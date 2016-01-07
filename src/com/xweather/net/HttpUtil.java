@@ -1,4 +1,4 @@
-package com.xweather.util;
+package com.xweather.net;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,11 +9,14 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import com.xweather.util.LogUtil;
+
 public class HttpUtil {
 	
 	
 	public static void sendHttpRequest(final String address,final HttpCallbackListener listener){
 		
+		LogUtil.getInstance().info(address);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -35,17 +38,22 @@ public class HttpUtil {
 						if (listener != null){
 							listener.onFinish(response.toString());
 						}
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (ProtocolException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (Exception e){
+						LogUtil.getInstance().info(getClass().getName() + " onError : " + e.toString());
+						listener.onError(e);
 					}finally {
 						if (conn != null){
 							conn.disconnect();
 						}
 					}
+					/*catch (MalformedURLException e) {
+						e.printStackTrace();
+					} catch (ProtocolException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}*/
+					
 			}
 		}).start();
 		

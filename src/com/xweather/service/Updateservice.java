@@ -1,9 +1,9 @@
 package com.xweather.service;
 
+import com.xweather.net.HttpCallbackListener;
+import com.xweather.net.HttpUtil;
 import com.xweather.receiver.UpdateReceiver;
-import com.xweather.util.HttpCallbackListener;
-import com.xweather.util.HttpUtil;
-import com.xweather.util.Utility;
+import com.xweather.util.ParseResponUtil;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -51,14 +51,14 @@ public class Updateservice extends Service {
 		HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
 			
 			@Override
-			public void onRrror(Exception e) {
+			public void onError(Exception e) {
 				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void onFinish(String response) {
-				Utility.handleWeatherResponse(Updateservice.this, response);
+				ParseResponUtil.handleWeatherResponse(Updateservice.this, response);
 			}
 		});
 	}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionbarbg">#27A5F9</color>
+    <color name="activitybg">#27A5F9</color>
+    <color name="appwidget_textcolor">#ffffff</color>
+    
+</resources>

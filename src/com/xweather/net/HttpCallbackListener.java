@@ -1,7 +1,7 @@
-package com.xweather.util;
+package com.xweather.net;
 
 public interface HttpCallbackListener {
 	
 	void onFinish(String response);
-	void onRrror(Exception e);
+	void onError(Exception e);
 }

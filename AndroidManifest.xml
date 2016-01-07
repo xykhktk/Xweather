@@ -5,10 +5,11 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -17,15 +18,23 @@
         <activity
             android:name="com.xweather.activity.SelectArea"
             android:label="@string/app_name" >
-            <intent-filter>
+        </activity>
+        <activity android:name="com.xweather.activity.WeatherPageActivity"  >
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.xweather.activity.WeatherPageActivity"  ></activity>
         <service android:name="com.xweather.service.Updateservice"></service>
         <receiver android:name="com.xweather.receiver.UpdateReceiver"></receiver>
+        <receiver android:name="com.xweather.appwidgetprovider.XweatherAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/appwiget" />
+        </receiver>
     </application>
 
 </manifest>

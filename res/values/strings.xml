@@ -2,7 +2,21 @@
 <resources>
 
     <string name="app_name">Xweather</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_select_area">选择区域</string>
+    <string name="action_refresh">刷新</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string name="weather_page_error">服务器返回错误</string>
+    <string name="weather_page_pubtime">发布时间</string>
+    <string name="weather_page_fetching">同步中</string>
+    <string name="weather_page_refreshing">刷新中</string>
+    <string name="weather_page_publish">发布</string>
+    <string name="weather_page_faile">定位/获取信息失败，请稍后重试</string>
+    
+    <string name="select_area_failed_request_service">向服务器请求失败</string>
+    <string name="select_area_china">中国</string>
+    <string name="select_area_reading_info">正在读取信息</string>
 
+    <string name="simpledateformat">yyyy年m月d日</string>
+    
 </resources>

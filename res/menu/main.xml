@@ -1,9 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_select_area"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:icon="@drawable/ic_list_white_36dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_select_area"/>
 
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_autorenew_white_36dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_refresh"/>
+    
 </menu>
