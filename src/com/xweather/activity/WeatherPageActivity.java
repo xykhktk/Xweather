@@ -57,7 +57,7 @@ public class WeatherPageActivity extends Activity implements OnClickListener {
 		if(coutrycode != null){	//if it is comes from select area page
 			LogUtil.getInstance().info(getClass().getName() + " coutrycode " + coutrycode);
 			publishText.setText(getResources().getString(R.string.weather_page_fetching));
-			weatherInforlayout.setVisibility(View.INVISIBLE);
+			//weatherInforlayout.setVisibility(View.INVISIBLE);
 			//cityName.setVisibility(View.INVISIBLE);
 			queryWeatherCode(coutrycode);	
 		}else if(!TextUtils.isEmpty(PreferenceManager.getDefaultSharedPreferences(this).getString("city_name", ""))){ 
@@ -176,7 +176,7 @@ public class WeatherPageActivity extends Activity implements OnClickListener {
 		weatherDespText.setText(pre.getString(Consts.SPKey_Weather_desp, ""));
 		publishText.setText(getResources().getString(R.string.weather_page_pubtime)+pre.getString(Consts.SPKey_Publish_time,""));
 		dataText.setText(pre.getString(Consts.SPKey_Current_date, ""));
-		weatherInforlayout.setVisibility(View.VISIBLE);
+		//weatherInforlayout.setVisibility(View.VISIBLE);
 		
 		Intent intent = new Intent(this, Updateservice.class);
 		startService(intent);

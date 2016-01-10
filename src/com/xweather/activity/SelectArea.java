@@ -7,10 +7,10 @@ import com.example.xweather.R;
 import com.xweather.bean.City;
 import com.xweather.bean.Country;
 import com.xweather.bean.Province;
+import com.xweather.db.WeatherDb;
 import com.xweather.net.HttpCallbackListener;
 import com.xweather.net.HttpUtil;
 import com.xweather.util.ParseResponUtil;
-import com.xweather.util.WeatherDb;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

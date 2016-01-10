@@ -1,4 +1,4 @@
-package com.xweather.util;
+package com.xweather.db;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import com.xweather.bean.City;
 import com.xweather.bean.Country;
 import com.xweather.bean.Province;
-import com.xweather.db.DBOpenHelper;
 
 import android.content.ContentValues;
 import android.content.Context;

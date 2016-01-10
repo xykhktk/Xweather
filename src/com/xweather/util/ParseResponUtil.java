@@ -11,6 +11,7 @@ import com.example.xweather.R;
 import com.xweather.bean.City;
 import com.xweather.bean.Country;
 import com.xweather.bean.Province;
+import com.xweather.db.WeatherDb;
 
 import android.content.Context;
 import android.content.SharedPreferences;
