@@ -3,5 +3,8 @@
     <color name="actionbarbg">#27A5F9</color>
     <color name="activitybg">#27A5F9</color>
     <color name="appwidget_textcolor">#ffffff</color>
+    <color name="default_text_color">#ffffff</color>
+    
+    <color name="divier_line">#ffffff</color>
     
 </resources>

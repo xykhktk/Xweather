@@ -23,6 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ *这是原先使用国家天气网的api时，所用的activity。因为接口改用聚合数据，所以这个activity已经弃用。
+ *但是就不删除了，就当作是纪念吧。
+ */
 public class WeatherPageActivity extends Activity implements OnClickListener {
 	
 	private LinearLayout weatherInforlayout;
@@ -53,18 +57,19 @@ public class WeatherPageActivity extends Activity implements OnClickListener {
 		
 		String coutrycode = null;
 		coutrycode = getIntent().getStringExtra("country_code");
-		
 		if(coutrycode != null){	//if it is comes from select area page
-			LogUtil.getInstance().info(getClass().getName() + " coutrycode " + coutrycode);
+			LogUtil.getInstance().info(getClass().getName() + " from select page , coutrycode " + coutrycode);
 			publishText.setText(getResources().getString(R.string.weather_page_fetching));
 			//weatherInforlayout.setVisibility(View.INVISIBLE);
 			//cityName.setVisibility(View.INVISIBLE);
 			queryWeatherCode(coutrycode);	
 		}else if(!TextUtils.isEmpty(PreferenceManager.getDefaultSharedPreferences(this).getString("city_name", ""))){ 
 			//not first time running,and have data in sharedpreference.
+			LogUtil.getInstance().info(getClass().getName() + " coutrycode == null  ,read preference." );
 			showWeather();
 		}else if(!TextUtils.isEmpty(LocationUtil.getInstance().getWeatherCode())){	
 			//if it is first time running: no data in SharedPreferences ,and LocationUtil has data.
+			LogUtil.getInstance().info(getClass().getName() + " coutrycode == null  ,no data in SharedPreferences,,and LocationUtil has data" );
 			queryWeatherInfo(LocationUtil.getInstance().getWeatherCode());
 		}else{
 			Toast.makeText(this, getResources().getString(R.string.weather_page_faile), Toast.LENGTH_SHORT).show();
@@ -171,8 +176,8 @@ public class WeatherPageActivity extends Activity implements OnClickListener {
 		SharedPreferences pre = PreferenceManager.getDefaultSharedPreferences(this);
 		//cityName.setText(pre.getString("city_name", ""));
 		getActionBar().setTitle(pre.getString(Consts.SPKey_City_name, ""));
-		temp1text.setText(pre.getString(Consts.SPKey_Temp2, ""));
-		temp2text.setText(pre.getString(Consts.SPKey_Temp1, ""));
+		temp1text.setText(pre.getString(Consts.SPKey_Temp1, ""));
+		temp2text.setText(pre.getString(Consts.SPKey_Temp2, ""));
 		weatherDespText.setText(pre.getString(Consts.SPKey_Weather_desp, ""));
 		publishText.setText(getResources().getString(R.string.weather_page_pubtime)+pre.getString(Consts.SPKey_Publish_time,""));
 		dataText.setText(pre.getString(Consts.SPKey_Current_date, ""));

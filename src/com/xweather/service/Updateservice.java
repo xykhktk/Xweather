@@ -1,18 +1,27 @@
 package com.xweather.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import com.xweather.activity.WeatherPageJuheActivity;
+import com.xweather.bean.JuheInfo;
 import com.xweather.net.HttpCallbackListener;
 import com.xweather.net.HttpUtil;
 import com.xweather.receiver.UpdateReceiver;
+import com.xweather.util.Consts;
+import com.xweather.util.ObjectUtil;
 import com.xweather.util.ParseResponUtil;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 public class Updateservice extends Service {
 
@@ -45,22 +54,34 @@ public class Updateservice extends Service {
 
 	
 	public void updateWeather(){
-		SharedPreferences pre = PreferenceManager.getDefaultSharedPreferences(this);
-		String weathercode = pre.getString("weather_code", ""); 
-		String address = "http://www.weather.com.cn/data/cityinfo/" + weathercode + ".html";
-		HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
-			
-			@Override
-			public void onError(Exception e) {
-				// TODO Auto-generated method stub
+		SharedPreferences pre = getSharedPreferences(Consts.SP_Name, Context.MODE_PRIVATE);
+		String city = pre.getString(Consts.SPKey_Selected_City, ""); 
+		if(!TextUtils.isEmpty(city)) city = pre.getString(Consts.SPKey_Current_city, "");
+		if(!TextUtils.isEmpty(city)) city = Consts.DefaultCity;
+		
+		try {
+			String address = Consts.Juhe_Querry_Weather_Url + URLEncoder.encode(city,"UTF-8");
+			HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
 				
-			}
-			
-			@Override
-			public void onFinish(String response) {
-				ParseResponUtil.handleWeatherResponse(Updateservice.this, response);
-			}
-		});
+				@Override
+				public void onError(Exception e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onFinish(String response) {
+					//ParseResponUtil.handleWeatherResponse(Updateservice.this, response);
+					JuheInfo uheInfo = ParseResponUtil.handleJsonResultFromJuhe(response, Updateservice.this);
+					ObjectUtil.saveJuheInfo(Updateservice.this, uheInfo);
+				}
+			});
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 	}
 	
 }

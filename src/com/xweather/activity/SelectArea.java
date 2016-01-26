@@ -86,11 +86,8 @@ public class SelectArea extends Activity{
 					selectedCity = cityList.get(arg2);
 					queryCountry();
 				}else if(currentLevel == LEVEL_COUNTRY){
-					String countryCode = countryList.get(arg2).getCountcode();
-					Intent intent = new Intent(SelectArea.this, WeatherPageActivity.class);
-					intent.putExtra("country_code", countryCode);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
+					String countryName = countryList.get(arg2).getCountName();
+					WeatherPageJuheActivity.startMeWithContryName(SelectArea.this, countryName);
 					finish();
 				}
 			}});

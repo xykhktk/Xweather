@@ -5,5 +5,35 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     
     <dimen name="actionbar_textsize">20sp</dimen>
-
+    
+    
+    <dimen name="views_default_magin">12dp</dimen>
+    
+    <!--  聚合数据实时信息的viewgroup -->
+    <dimen name="realtime_group_margin">12dp</dimen>
+    <dimen name="realtime_group_width">180dp</dimen>
+    <dimen name="realtime_group_hight">100dp</dimen>
+    <dimen name="realtime_tv_temperature_textsize">48sp</dimen>
+    <dimen name="realtime_tv_describe_textsize">18sp</dimen>
+    <dimen name="realtime_tv_wind_textsize">18sp</dimen>
+    
+    <!-- pm2.5的viewgroup -->
+    <dimen name="pm25_group_margin">12dp</dimen>
+    <dimen name="pm25_group_width">80dp</dimen>
+    <dimen name="pm25_group_hight">80dp</dimen>
+    <dimen name="pm25_tv_pm25_textsize">18sp</dimen>
+    
+  	<!--   天气预报viewgroup -->
+  	<dimen name="future_viewgroup_width">320dp</dimen>
+  	<dimen name="future_tv_textsize">18sp</dimen>
+  	<dimen name="future_maginleft_week">12dp</dimen>
+  	<dimen name="future_maginleft_info">48dp</dimen>
+  	<dimen name="future_maginleft_day">48dp</dimen>
+  	<dimen name="future_maginleft_night">48dp</dimen>
+  	
+	<!--   life viewgroup -->
+	<dimen name="life_viewgroup_magintop">36dp</dimen>
+  	<dimen name="life_viewgroup_width">320dp</dimen>
+  	<dimen name="life_views_default_magin">4dp</dimen>
+  	
 </resources>

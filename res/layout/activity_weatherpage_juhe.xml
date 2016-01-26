@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:background="@color/activitybg"
+        >
+        
+	   <LinearLayout 
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical" >   
+       
+       
+        <!--  实时信息+pm25 -->
+   		 <RelativeLayout 
+        android:layout_width="match_parent"
+		android:layout_height="wrap_content" 
+		android:layout_margin="@dimen/realtime_group_margin"
+		android:layout_gravity="center_horizontal"
+        >
+        
+        <!--  实时信息 -->
+       <LinearLayout 
+          android:layout_width="@dimen/realtime_group_width"
+		  android:layout_height="wrap_content"
+		  android:orientation="horizontal"
+		  android:layout_alignParentLeft="true"
+           >
+           
+           <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_realtime_temperature"
+           		android:text="---"
+           		android:textColor="@color/default_text_color"
+           		android:textSize="@dimen/realtime_tv_temperature_textsize"
+           		android:layout_margin="@dimen/views_default_magin"
+           		android:gravity="center_vertical"
+               />
+           
+           <LinearLayout 
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"       
+               >
+              <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_realtime_describe"
+           		android:text="---"
+           		android:textColor="@color/default_text_color"
+           		android:textSize="@dimen/realtime_tv_describe_textsize"
+           		android:layout_margin="@dimen/views_default_magin"
+               />
+              
+               <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_realtime_wind"
+           		android:text="---"
+           		android:textColor="@color/default_text_color"
+           		android:textSize="@dimen/realtime_tv_wind_textsize"
+           		android:layout_margin="@dimen/views_default_magin"
+               />
+               
+           </LinearLayout>
+       </LinearLayout>
+       
+       <!-- pm2.5信息 -->
+       <LinearLayout 
+          android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:orientation="vertical"
+		  android:layout_alignParentRight="true"
+           >
+           
+            <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_pm25_data"
+           		android:text="---"
+           		android:textColor="@color/default_text_color"
+           		android:textSize="@dimen/pm25_tv_pm25_textsize"
+           		android:layout_margin="@dimen/views_default_magin"
+               />
+            
+            <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_pm25_quality"
+           		android:text="---"
+           		android:textColor="@color/default_text_color"
+           		android:textSize="@dimen/pm25_tv_pm25_textsize"
+           		android:layout_margin="@dimen/views_default_magin"
+               />
+       </LinearLayout>
+       
+    </RelativeLayout>
+    
+    
+  	<!-- 未来天气于预报 -->
+  	<GridLayout 
+  	    android:layout_width="@dimen/future_viewgroup_width"
+		android:layout_height="wrap_content"  
+  	    android:orientation="horizontal"
+  	    android:rowCount="4"
+  	    android:columnCount="4"
+  	    android:layout_gravity="center_horizontal"
+  	    android:background="@drawable/retanglebg"
+  	    >
+  	    
+  	     <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_week"
+           		android:text="@string/future_date"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_week"
+           		android:textColor="@color/default_text_color"
+               />
+  	    
+  	      <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_des"
+           		android:text="@string/future_des"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_info"
+           		android:textColor="@color/default_text_color"
+               />
+  	    
+  	    <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_day"
+           		android:text="@string/future_day"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_day"
+           		android:textColor="@color/default_text_color"
+               />
+  	    
+  	      <TextView
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_night"
+           		android:text="@string/future_night"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_night"
+           		android:textColor="@color/default_text_color"
+               />
+  	    
+  	    <!--  第一行 -->
+	    <TextView
+	            android:text="今天"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_week_0"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_week"
+           		android:textColor="@color/default_text_color"
+               />
+	    
+	     <TextView 
+	            android:text="---"
+	            android:layout_width="wrap_content"
+				android:layout_height="wrap_content"  
+	            android:id="@+id/tv_future_info_0"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_info"
+           		android:textColor="@color/default_text_color"
+	            />
+  	    
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_day_0"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_day"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_night_0"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_night"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     <!--  第二行 -->
+	     <TextView
+	           android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_week_1"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_week"
+           		android:textColor="@color/default_text_color"
+               />
+	    
+	     <TextView 
+	            android:text="---"
+	            android:layout_width="wrap_content"
+				android:layout_height="wrap_content"  
+	            android:id="@+id/tv_future_info_1"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_info"
+           		android:textColor="@color/default_text_color"
+	            />
+  	    
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_day_1"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_day"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_night_1"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_night"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     <!--  第3行 -->
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_week_2"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_week"
+           		android:textColor="@color/default_text_color"
+               />
+	    
+	     <TextView 
+	            android:text="---"
+	            android:layout_width="wrap_content"
+				android:layout_height="wrap_content"  
+	            android:id="@+id/tv_future_info_2"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_info"
+           		android:textColor="@color/default_text_color"
+	            />
+  	    
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_day_2"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_day"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_night_2"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_night"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	      <!--  第4行 -->
+	     <TextView
+	           android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_week_3"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_week"
+           		android:textColor="@color/default_text_color"
+               />
+	    
+	     <TextView 
+	            android:text="---"
+	            android:layout_width="wrap_content"
+				android:layout_height="wrap_content"  
+	            android:id="@+id/tv_future_info_3"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_info"
+           		android:textColor="@color/default_text_color"
+	            />
+  	    
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_day_3"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_day"
+           		android:textColor="@color/default_text_color"
+               />
+	     
+	     
+	     <TextView
+	            android:text="---"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"        
+           		android:id="@+id/tv_future_night_3"
+           		android:textSize="@dimen/future_tv_textsize"
+           		android:layout_marginLeft="@dimen/future_maginleft_night"
+           		android:textColor="@color/default_text_color"
+               />
+  	</GridLayout>
+	        
+	 <LinearLayout
+        android:layout_width="@dimen/life_viewgroup_width"
+		android:layout_height="wrap_content"        
+		android:orientation="vertical"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="@dimen/life_viewgroup_magintop"
+		android:background="@drawable/retanglebg"
+        >
+	     
+	     
+	    <TextView
+	        android:text="生活指数"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	    
+	     <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	     
+	    <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/kongtiao0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        /> 
+	     
+	    <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/kongtiao1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        /> 
+	        
+	    <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	    
+	     <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/yundong0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        /> 
+	        
+	     <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/yundong1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	     
+	     <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	     
+	     <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/ziwaixian0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        /> 
+	        
+	     <TextView
+	          android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/ziwaixian1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	     
+	     <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	      <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/ganmao0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	      
+	      <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/ganmao1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	      
+	      <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	      
+	       <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/xiche0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	       
+	       <TextView
+	       android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/xiche1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	       
+	       <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	       
+	       <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/wuran0"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	       
+	       <TextView
+	            android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/wuran1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	       
+	       <View 
+	        android:layout_width="match_parent"
+			android:layout_height="1px"
+			android:background="@color/divier_line"
+			android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	       
+	       <TextView
+	            android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/chuanyi0"
+	        android:textColor="@color/default_text_color"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        />
+	       
+	       <TextView
+	        android:text="---"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/chuanyi1"
+	        android:layout_margin="@dimen/life_views_default_magin"
+	        android:textColor="@color/default_text_color"
+	        />
+	 </LinearLayout>
+	 
+    </LinearLayout>
+   
+</ScrollView>

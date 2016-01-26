@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,7 +23,7 @@ public class LocationUtil {
 	private double latitude;
 	private double longitude;
 	private Geocoder geocoder;
-	private String addr;
+	private String current_city;
 	private String weatherCode;
 	private String provider = null;
 	private Location location;
@@ -87,29 +88,32 @@ public class LocationUtil {
 	}
 	
 	/**
-	 * 根据城市名称获取其编号
+	 * 根据城市名称获取其编号。因为api已改，这个方法没用了。
 	 */
 	private void extractCityCode() {
-		Pattern p = Pattern.compile(addr + ":\\d{9}");
+		Pattern p = Pattern.compile(current_city + ":\\d{9}");
 		Matcher m = p.matcher(Consts.City_Name_Code);
 		while(m.find()){
 			weatherCode = m.group().substring(3);
-			LogUtil.getInstance().info(getClass().getName() + " CityCode:" + weatherCode);
+			//LogUtil.getInstance().info(getClass().getName() + " CityCode:" + weatherCode);
 		}
 		
 		
 	}
 
 	/**
-	 * 从geocoder结果中获取城市名称
+	 * 从geocoder结果中获取城市名称.
 	 */
 	private void extractLocality(String s){
 		Pattern p = Pattern.compile("locality=.*,thoroughfare");
 		Matcher m = p.matcher(s);
 		while(m.find()){
-			addr = m.group();
-			addr = addr.substring(9, addr.length()-14);
-			LogUtil.getInstance().info(getClass().getName() + " addr:" + addr);
+			current_city = m.group();
+			current_city = current_city.substring(9, current_city.length()-14);
+			LogUtil.getInstance().info(getClass().getName() + " current_city:" + current_city);
+			Editor editor = context.getSharedPreferences(Consts.SP_Name, Context.MODE_PRIVATE).edit();
+			editor.putString(Consts.SPKey_Current_city, current_city);
+			editor.commit();
 			break;
 		}
 	}
@@ -156,6 +160,12 @@ public class LocationUtil {
 			Location mlocation = null;
 			while(mlocation == null){
 				mlocation = manager.getLastKnownLocation(mProvider);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			return mlocation;
 		}
@@ -171,8 +181,8 @@ public class LocationUtil {
 		
 	}
 	
-	public String getAddr() {
-		return addr;
+	public String getCurrent_city() {
+		return current_city;
 	}
 	
 	public String getWeatherCode() {
